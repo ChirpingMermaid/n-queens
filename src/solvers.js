@@ -29,9 +29,9 @@ window.findNRooksSolution = function(n) {
   // };
   //n = 4;
   var rooks = 0;
-  //var boardObject = new Board({n: n});
-  //var board = boardObject.rows();
-  var board = new Board({n: n});
+  var boardObject = new Board({n: n});
+  var board = boardObject.rows();
+  //var board = new Board({n: n});
   // var index = 0;
   // for (var i = 0; i < n; i++) {
   //   var row = board.get(i);
@@ -42,12 +42,12 @@ window.findNRooksSolution = function(n) {
   //var board = createBoard(n);
 
   for (var i = 0; i < n; i++) {
-    var row = board.get(i);
+    //var row = board.get(i);
     for (var j = 0; j < n; j++) {
-      row[j] = 1;
+      board[i][j] = 1;
       rooks++;
-      if (board.hasAnyRooksConflicts()) {
-        row[j] = 0;
+      if (boardObject.hasAnyRooksConflicts()) {
+        board[i][j] = 0;
         rooks--;
       }
       if (rooks === n) {
@@ -58,7 +58,7 @@ window.findNRooksSolution = function(n) {
   //console.log("hello", board);
   // //console.log("get", board.get(0));
 
-  var solution = board.rows(); 
+  var solution = board; 
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
@@ -150,26 +150,26 @@ window.countNRooksSolutions = function(n) {
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
 window.findNQueensSolution = function(n) {
+  n = 4;
   var queens = 0;
-  var board = new Board({n: n});
-
+  var boardObject = new Board({n: n});
+  var board = boardObject.rows();
   for (var i = 0; i < n; i++) {
-    var row = board.get(i);
     for (var j = 0; j < n; j++) {
-      row[j] = 1;
-      rooks++;
-      if (board.hasAnyRooksConflicts()) {
-        row[j] = 0;
-        rooks--;
+      board[i][j] = 1;
+      queens++;
+      if (boardObject.hasAnyQueensConflicts()) {
+        board[i][j] = 0;
+        queens--;
       }
-      if (rooks === n) {
+      if (queens === n) {
         break;
-      }
+      } 
     }
   }
 
-  var solution = board.rows(); 
-
+  var solution = board; 
+  console.log("sol", solution);
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(solution));
   return solution;
 };
