@@ -95,7 +95,6 @@
 
       var conflict = false;
       var rowCount = this.get('n');
-      console.log(rowCount);
       for (var i = 0; i < rowCount; i++) {
         if (this.hasRowConflictAt(i)) {
           conflict = true;
